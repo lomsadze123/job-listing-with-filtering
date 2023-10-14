@@ -1,7 +1,11 @@
+import Jobs from "./components/Jobs";
+import Picture from "./components/Picture";
+
 function App() {
   return (
     <div>
-      <h1>Hello World</h1>
+      <Picture />
+      <Jobs />
     </div>
   );
 }
