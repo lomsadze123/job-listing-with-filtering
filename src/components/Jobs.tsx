@@ -10,29 +10,61 @@ const Jobs = () => {
   const [filterTool, setFilterTool] = useState<string[]>([]);
 
   const handleChoose = (languages: string) => {
+    setChoice(true);
     if (!filter.includes(languages)) {
       setFilter([...filter, languages]);
     }
   };
 
   const handleFilterRole = (role: string) => {
+    setChoice(true);
     setFilterRole(role);
   };
 
   const handleFilterLevel = (level: string) => {
+    setChoice(true);
     setFilterLevel(level);
   };
 
   const handleFilterTool = (item: string) => {
+    setChoice(true);
     if (!filterTool.includes(item)) {
       setFilterTool([...filterTool, item]);
-      console.log(item);
+    }
+  };
+
+  const handleClear = (filterToRemove: string) => {
+    if (filterToRemove === "") {
+      setFilterRole("");
+      setFilterLevel("");
+      setFilter([]);
+      setFilterTool([]);
+      setChoice(false);
+    } else if (filterToRemove === "filterRole") {
+      setFilterRole("");
+    } else if (filterToRemove === "filterLevel") {
+      setFilterLevel("");
+    } else {
+      if (filter.includes(filterToRemove)) {
+        setFilter(filter.filter((item) => item !== filterToRemove));
+      } else if (filterTool.includes(filterToRemove)) {
+        setFilterTool(filterTool.filter((item) => item !== filterToRemove));
+      }
     }
   };
 
   return (
     <main className="px-6 mx-auto my-14 flex flex-col gap-10 max-w-[1110px] lg:px-0">
-      {choice && <Filter />}
+      {choice && (
+        <Filter
+          filter={filter}
+          filterRole={filterRole}
+          filterLevel={filterLevel}
+          filterTool={filterTool}
+          handleClear={handleClear}
+          setChoice={setChoice}
+        />
+      )}
       {Data.map(
         (data) =>
           (filter.length === 0 ||

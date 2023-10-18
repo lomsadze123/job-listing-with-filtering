@@ -3,10 +3,10 @@ import Picture from "./components/Picture";
 
 function App() {
   return (
-    <div>
+    <>
       <Picture />
       <Jobs />
-    </div>
+    </>
   );
 }
 
